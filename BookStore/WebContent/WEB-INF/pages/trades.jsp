@@ -1,86 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/commons/common.jsp" %>  
-   
+	pageEncoding="UTF-8"%>
+<%@ include file="/commons/common.jsp"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="./build/react.js"></script>  
-<script src="./build/react-dom.js"></script>  
-<script src="./build/browser.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/antd@3.0.1/dist/antd.min.css">
-<script type="text/javascript" src="https://unpkg.com/antd@3.0.1/dist/antd.min.js"></script>
-
+<link rel="stylesheet" href="./build/semantic.css">
+<script src="./build/semantic.js"></script>
+<script src="./build/jquery.min.js"></script>
 
 <title>Insert title here</title>
 </head>
 <body>
-<script type="text/babel">  
+<center>
+	<c:forEach items="${user.trades }" var="trade">
+		<table class="ui celled striped table">
 
-import React from 'react';  
-import ReactDOM from 'react-dom';  
-import { DatePicker, message } from 'antd';  
-  
-class App extends React.Component {  
-  constructor(props) {  
-    super(props);  
-    this.state = {  
-      date: '',  
-    };  
-  }  
-  handleChange(date) {  
-    message.info('您选择的日期是: ' + date.toString());  
-    this.setState({ date });  
-  }  
-  render() {  
-    return (  
-      <div style={{ width: 400, margin: '100px auto' }}>  
-        <DatePicker onChange={value => this.handleChange(value)} />  
-        <div style={{ marginTop: 20 }}>当前日期：{this.state.date.toString()}</div>  
-      </div>  
-    );  
-  }  
-}  
-ReactDOM.render(<App />, document.getElementById('root'));  
+			<thead>
+				<tr>
+					<th colspan="3">交易人姓名: ${user.username }<br>交易时间: ${trade.tradeTime }  </th>
+				</tr>
+			</thead>
+					<thead>
+    <tr><th>名称</th>
+    <th>单价</th>
+    <th>数量</th>
+  </tr></thead>
+			<tbody>
+				<c:forEach items="${trade.items }" var="item">
 
-</script>  
-	<div id="root"></div>
-	<center>
-		<br><br>
-		<h4>User: ${user.username }</h4>
-		
-		<br><br>
-			<table>
-				<c:forEach items="${user.trades }" var="trade">
-					
 					<tr>
-					<td>
-					<table border="1" cellpadding="10" cellspacing="0">
-					
-						<tr>
-							<td colspan="3">TradTime: ${trade.tradeTime }</td>
-						</tr>
-		
-						<c:forEach items="${trade.items }" var="item">
-							
-							<tr>
-								<td>${item.book.title }</td>
-								<td>价格：${item.book.price }</td>
-								<td>数量：${item.quantity }</td>
-							</tr>
-							
-						</c:forEach>
-						
-					</table>
-					<br><br>
-					</td>
+						<td class="collapsing">${item.book.title }</td>
+						<td class="left aligned">${item.book.price }</td>
+						<td class="left aligned">${item.quantity }</td>
 					</tr>
-					
+
 				</c:forEach>
-			</table>
-		
-	</center>
-	
+			</tbody>
+		</table>
+	</c:forEach>
+</center>
 </body>
 </html>
