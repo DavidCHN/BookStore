@@ -12,10 +12,12 @@ public interface AccountDAO {
 	public abstract Account get(Integer accountId);
 
 	/**
-	 * 根据传入的 accountId, amount 更新指定账户的余额: 扣除 amount 指定的钱数
+	 * 根据传入的 accountId, amount 更新指定账户的余额: 扣除 amount 指定的钱数,这是唯一确定的
 	 * @param accountId
 	 * @param amount
 	 */
+	
+	
 	public abstract void updateBalance(Integer accountId, float amount);
 
 }
